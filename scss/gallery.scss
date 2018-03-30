@@ -15,6 +15,7 @@
   &--stream {
     position: relative;
     margin: 0 -5em;
+    padding: 1em 0;
 
     .gallery-image {
       padding-bottom: 100%;
@@ -22,31 +23,32 @@
       &-item {
         padding-bottom: 4.5em;
 
-        &-title {
+        &-meta {
           position: absolute;
-          bottom: -3em;
-          left: 0;
-          height: 1.7em;
+          bottom: 0;
+          z-index: 1;
           width: 100%;
-          padding-right: 2em;
-          text-align: left;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          height: 5.5em;
+          font-size: $font-size-small;
+          border: 1px solid white;
+          padding: 0.5em 0;
+        }
+
+        &-title {
           font-weight: bold;
+          text-align: left;
          }
 
         &-copyright {
-          position: absolute;
-          bottom: -5.5em;
-          left: 0;
-          font-size: $font-size-x-small;
+          text-align: left;
         }
       }
     }
   }
 
   &--grid {
+    margin-top: 2em;
+    padding: 1em 5em 0;
 
     .gallery-images {
       display: flex;
@@ -59,16 +61,20 @@
 
       .gallery-image-item {
         width: 50%;
-        margin-bottom: 3em;
-        border: 4em solid transparent;
+        margin-bottom: 5em;
+        border: 8em solid transparent;
         border-top: 0;
 
         &:nth-child(2n+1) {
-          border-left: 3em solid transparent;
+          border-right: 5em solid transparent;
         }
 
         &:nth-child(2n) {
-          border-left: 3em solid transparent;
+          border-left: 5em solid transparent;
+        }
+
+        &:nth-last-child(n+1) {
+          border-bottom: 0;
         }
 
         .gallery-image {
@@ -83,7 +89,7 @@
         }
 
         &-meta {
-          
+          font-size: $font-size-small;
         }
 
         &-title { 
@@ -93,7 +99,6 @@
 
         &-copyright {
           position: relative;
-          font-size: 0.8em;
         }
       }
     }
@@ -113,14 +118,10 @@
 @media screen and (max-width: 667px) {
 
   .gallery--inline .gallery-image-item-title{
-    padding-left: 5em;
-    padding-right: 6em;
     transform: scale(1.2);
   }
 
   .gallery--inline .gallery-image-item-copyright {
-    padding-left: 6em; 
-    padding-right: 6em;
     transform: scale(1.2);
   }
 }

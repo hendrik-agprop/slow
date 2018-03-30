@@ -223,7 +223,7 @@ function slow_custom_content_gallery( $paragraph, $classes = '' ) {
   if ( $layout == 'stream' ) {
     $gallery_classes = 'gallery--stream gallery--inline swiper-container swiper-container--stream swiper-container--inline';
   } elseif ( $layout == 'grid' ) {
-    $gallery_classes = 'gallery--grid container--medium';
+    $gallery_classes = 'gallery--grid container--large';
   }
 
   echo '<div class="gallery ' . $gallery_classes . '">';
@@ -281,9 +281,9 @@ function slow_custom_content_gallery( $paragraph, $classes = '' ) {
     echo '<div class="container container--small">';
     echo '<div class="swiper-button-prev"></div>';
     echo '<div class="swiper-button-next"></div>';
+    echo '</div>';
   }
 
-  echo '</div>';
   echo '</div>';
   echo '</div>';
 }

@@ -623,8 +623,6 @@ textarea {
         .article-content-paragraph--image--aside-content-wrapper {
           max-width: 50%;
           padding: 0; }
-  .article-content-paragraph--gallery {
-    padding: 1em 0; }
   .article-content-paragraph--video {
     padding: 1em 0; }
     .article-content-paragraph--video-container {
@@ -788,54 +786,58 @@ textarea {
   background: #e0e0e0; }
 .gallery--stream {
   position: relative;
-  margin: 0 -5em; }
+  margin: 0 -5em;
+  padding: 1em 0; }
   .gallery--stream .gallery-image {
     padding-bottom: 100%; }
     .gallery--stream .gallery-image-item {
       padding-bottom: 4.5em; }
-      .gallery--stream .gallery-image-item-title {
+      .gallery--stream .gallery-image-item-meta {
         position: absolute;
-        bottom: -3em;
-        left: 0;
-        height: 1.7em;
+        bottom: 0;
+        z-index: 1;
         width: 100%;
-        padding-right: 2em;
-        text-align: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-weight: bold; }
+        height: 5.5em;
+        font-size: 0.8em;
+        border: 1px solid white;
+        padding: 0.5em 0; }
+      .gallery--stream .gallery-image-item-title {
+        font-weight: bold;
+        text-align: left; }
       .gallery--stream .gallery-image-item-copyright {
-        position: absolute;
-        bottom: -5.5em;
-        left: 0;
-        font-size: 0.7em; }
-.gallery--grid .gallery-images {
-  display: flex;
-  flex-direction: column; }
-  .gallery--grid .gallery-images-row {
+        text-align: left; }
+.gallery--grid {
+  margin-top: 2em;
+  padding: 1em 5em 0; }
+  .gallery--grid .gallery-images {
     display: flex;
-    align-items: flex-end; }
-  .gallery--grid .gallery-images .gallery-image-item {
-    width: 50%;
-    margin-bottom: 3em;
-    border: 4em solid transparent;
-    border-top: 0; }
-    .gallery--grid .gallery-images .gallery-image-item:nth-child(2n+1) {
-      border-left: 3em solid transparent; }
-    .gallery--grid .gallery-images .gallery-image-item:nth-child(2n) {
-      border-left: 3em solid transparent; }
-    .gallery--grid .gallery-images .gallery-image-item .gallery-image {
-      position: relative;
-      padding-bottom: 166%; }
-    .gallery--grid .gallery-images .gallery-image-item--landscape .gallery-image {
-      padding-bottom: 75%; }
-    .gallery--grid .gallery-images .gallery-image-item-title {
-      position: relative;
-      font-weight: bold; }
-    .gallery--grid .gallery-images .gallery-image-item-copyright {
-      position: relative;
-      font-size: 0.8em; }
+    flex-direction: column; }
+    .gallery--grid .gallery-images-row {
+      display: flex;
+      align-items: flex-end; }
+    .gallery--grid .gallery-images .gallery-image-item {
+      width: 50%;
+      margin-bottom: 5em;
+      border: 8em solid transparent;
+      border-top: 0; }
+      .gallery--grid .gallery-images .gallery-image-item:nth-child(2n+1) {
+        border-right: 5em solid transparent; }
+      .gallery--grid .gallery-images .gallery-image-item:nth-child(2n) {
+        border-left: 5em solid transparent; }
+      .gallery--grid .gallery-images .gallery-image-item:nth-last-child(n+1) {
+        border-bottom: 0; }
+      .gallery--grid .gallery-images .gallery-image-item .gallery-image {
+        position: relative;
+        padding-bottom: 166%; }
+      .gallery--grid .gallery-images .gallery-image-item--landscape .gallery-image {
+        padding-bottom: 75%; }
+      .gallery--grid .gallery-images .gallery-image-item-meta {
+        font-size: 0.8em; }
+      .gallery--grid .gallery-images .gallery-image-item-title {
+        position: relative;
+        font-weight: bold; }
+      .gallery--grid .gallery-images .gallery-image-item-copyright {
+        position: relative; }
 .gallery-image {
   position: relative;
   width: 100%;
@@ -847,13 +849,9 @@ textarea {
 
 @media screen and (max-width: 667px) {
   .gallery--inline .gallery-image-item-title {
-    padding-left: 5em;
-    padding-right: 6em;
     transform: scale(1.2); }
 
   .gallery--inline .gallery-image-item-copyright {
-    padding-left: 6em;
-    padding-right: 6em;
     transform: scale(1.2); } }
 .video {
   width: 100%;
