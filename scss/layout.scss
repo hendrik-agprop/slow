@@ -1,0 +1,266 @@
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-style: none;
+}
+
+.container {
+  position: relative;
+  max-width: 100%;
+  padding: 0 30px;
+
+  &--small {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  &--medium {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  &--full {
+    position: relative;
+    margin: 0 -30px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.page {
+  overflow-x: hidden;
+
+  &.bright {
+    .page-header {
+
+      .navigation {
+        &-burger {
+          background-image: url(./img/icn_burger_bright.svg);
+        }
+      }
+
+      .page-header-logo {
+        a {
+          color: $white;
+
+          &:hover {
+            border-bottom-color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  &--shows-sidebar-menu {
+
+    .page-content,
+    .page-footer {
+      transform: translate3d(-16em,0,0);
+    }
+
+    .page-header {
+      .navigation {
+        transform: translate3d(0,0,0);
+
+        &-burger {
+          transform: translate3d(-11.1em,0,0);
+          background-image: url(./img/icn_close.svg) !important;
+          background-size: 2em;
+        }
+
+        &-items {
+          
+        }
+
+        &-item {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+
+  &-header {
+    position: relative;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.5em;
+    margin-bottom: -3.5em;
+    padding-top: 15px;
+    float: left;
+    clear: both;
+
+    &-logo {
+      float: left;
+      font-size: 2.2em;
+      font-weight: bold;
+    }
+
+    .navigation {
+      float: right;
+      width: 14em;
+      clear: both;
+      padding: 2em 0 0;
+      transform: translate3d(105%, 0, 0);
+      transition: all .5s;
+
+      &--sub {
+        .navigation-item {
+          a {
+            font-size: 1.1em !important;
+            font-weight: normal;
+          }
+        }
+      }
+
+      &-burger {
+        position: absolute;
+        right: 30px;
+        top: 1.05em;
+        width: 1.75em;
+        height: 1.5em;
+        background-image: url(./img/icn_burger.svg);
+        background-size: 1.5em;
+        background-repeat: repeat-x;
+        background-position: center;
+        cursor: pointer;
+        transition: transform .5s;
+      }
+
+      &-items {
+        width: 14.2em;
+        right: 0;
+        float: right;
+        clear: both;
+        transition: all .5s;
+      }
+
+      &-item {
+        margin: 0;
+        opacity: 0;
+        text-align: left;
+        transition: all .3s;
+
+        a,
+        a:last-child {
+          font-size: 1.75em;
+          line-height: 1.5em;
+          margin: 0;
+
+          &:hover {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  &-content {
+    background: $white;
+    transition: transform .5s;
+    min-height: 24em;
+  }
+
+  &-footer {
+    padding: 4em 0 0;
+    transition: transform .5s;
+
+    &-copyright {
+      float: left;
+      padding: 0;
+
+      span {
+        line-height: 2em;
+        font-size: $font-size-small;
+      }
+    }
+
+    .navigation {
+      float: right;
+      
+      &-items {
+        .navigation-item {
+          a {
+            font-size: $font-size-small;
+            padding: 0.2em 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.list {
+  &--unstyled {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  &--inline {
+    padding: 0;
+    
+    li {
+      display: inline-block;
+    }
+
+    &--right {
+      text-align: right;
+    }
+  }
+}
+
+dl, ol, ul {
+  margin: 0 0 1em;
+}
+
+dl {
+  dt, dd {
+    margin: 0 0 .5em;
+    padding: 0;
+  }
+
+  dt:nth-child(n+2) {
+    margin-top: 2em;
+  }
+
+  &.list--inline {
+    dt, dd {
+      display: inline-block;
+      margin-right: 1em;
+    }
+  }
+}
+
+@media screen and (max-width: 667px) {
+
+  body {
+    font-size: 16px;
+  }  
+
+  .container {
+    position: relative;
+    max-width: 100%;
+    padding: 0 1em;
+
+    &--small,
+    &--medium {
+      max-width: 100%;
+    }
+  }
+
+  .page {
+    &-footer {
+      padding: 2em 0;
+
+      &-copyright {
+        float: left;
+        padding: 2em 0;
+        width: 100%;
+      }
+    }
+  }
+}

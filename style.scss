@@ -1,0 +1,40 @@
+/*!
+Theme Name: slow
+Theme URI: http://underscores.me/
+Author: ag–prop GmbH
+Author URI: http://www.ag-prop.com
+Description: Blog theme for slow
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: slow
+*/
+
+#wpadminbar {
+  opacity: 0;
+  width: 60%;
+  left: 20%;
+  transition: all .3s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+body.admin-bar {
+  margin-top: -32px;
+}
+
+@import './scss/variables.scss';
+@import './scss/layout.scss';
+@import './scss/typo.scss';
+@import './scss/forms.scss';
+@import './scss/navigation.scss';
+@import './scss/article.scss';
+@import './scss/gallery.scss';
+@import './scss/video.scss';
+@import './scss/zoomable.scss';
+@import './scss/newsletter-box';
+
+// Vendor additions
+@import './scss/swiper.scss';

@@ -1,0 +1,119 @@
+.page .swiper-container {
+
+  .swiper-lazy-preloader {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 1.5em;
+    width: 1.5em;
+    margin-left: -0.75em;
+    margin-top: -0.75em;
+  }
+
+  &--stream {
+    overflow-y: visible;
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      position: absolute;
+      bottom: 1.4em;
+      top: auto;
+      width: 1.6em;
+      height: 2em;
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      z-index: 2;
+    }
+
+    .swiper-button-prev {
+      left: 1em;
+      background-image: url(./img/icn_arrow_left.svg);
+    }
+
+    .swiper-button-next {
+      right: 1em;
+      background-image: url(./img/icn_arrow_right.svg);
+    }
+  }
+
+  &--fullscreen {
+    position: relative;
+    overflow: visible;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 30em;
+    background: transparent;
+  }
+
+  .swiper-slide {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center; 
+
+    .gallery-image-item-title,
+    .gallery-image-item-copyright {
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    &-active {
+      opacity: 1;
+
+      .gallery-image-item-title,
+      .gallery-image-item-copyright {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 667px) {
+  .page .swiper-container--inline {
+
+    .swiper-slide {
+      transition: transform .3s;
+      transform: scale3d(0.8, 0.8, 1);
+
+      &-active {
+        transform: scale3d(1.2, 1.2, 1);
+      }
+    }
+
+    &.swiper-container--stream {
+      overflow: visible;
+      transform: scale3d(0.7, 0.7, 1);
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        width: 1.8em;
+        height: 2.4em;
+      }
+
+      .swiper-button-prev {
+        left: 0;
+        transform: scale(1.5) translate(-1.4em, 2.2em);
+      }
+
+      .swiper-button-next {
+        right: 0;
+        transform: scale(1.5) translate(1.4em, 2.2em);
+      }
+    }
+  }
+}
