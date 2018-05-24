@@ -223,7 +223,7 @@ function slow_custom_content_gallery( $paragraph, $classes = '' ) {
   if ( $layout == 'stream' ) {
     $gallery_classes = 'gallery--stream gallery--inline swiper-container swiper-container--stream swiper-container--inline';
   } elseif ( $layout == 'grid' ) {
-    $gallery_classes = 'gallery--grid container--large';
+    $gallery_classes = 'gallery--grid container container--medium';
   }
 
   echo '<div class="gallery ' . $gallery_classes . '">';

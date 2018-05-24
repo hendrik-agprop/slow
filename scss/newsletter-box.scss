@@ -1,15 +1,22 @@
-.article-list {
+.article-list--post {
   .newsletter-box {
     padding-top: 3em;
     padding-bottom: 6em;
   }
 }
 
-
 .newsletter-box {
   padding: 1em 1.5em 2em;
   display: flex;
   flex-direction: column;
+
+  small {
+    font-size: 0.7em;
+    line-height: 1.4em;
+    display: inline-block;
+    padding: 1.5em 25% 0 0;
+    color: #888;
+  }
 
   &--small {
     align-self: flex-end;
@@ -19,12 +26,15 @@
     h2,
     p,
     form {
-      max-width: 22em;
       text-align: left;
     }
 
     p {
-      padding: 1em 0 .25em !important;
+      padding: 1em 0 2em !important;
+
+      small {
+        padding-top: 0;
+      }
     }
   }
 
@@ -34,8 +44,8 @@
   }
 
   p {
-    padding: 0;
-    margin: 0 0 1em;
+    padding: 0 20% 0;
+    margin: 1em 0 0;
   }
 
   form {

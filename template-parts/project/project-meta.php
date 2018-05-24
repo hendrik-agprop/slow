@@ -34,35 +34,71 @@ $project_meta_links = get_field( 'project_meta_links' );
   /* Project Team */
   if ( $project_meta_team ) {
 
-    if ( sizeof( $project_meta_team ) > 1 ) {
-      echo '<dt>Team</dt>';
-    } else if ( sizeof( $project_meta_team ) == 1 ) {
-      echo '<dt>Architekt / Designer</dt>';
-    } else {
+    if ( sizeof( $project_meta_team ) == 0 ) {
       return false;
     }
     
+    $managers = [];
+    $participants = [];
 
     foreach ($project_meta_team as $member) {
       $member_infos = $member['project_meta_team_member'];
-      $member_type = $member_infos['project_meta_team_member_type'];
       $member_role = $member_infos['project_meta_team_member_role'];
 
-      $member_name = '';
-      $member_url = '';
-
-      if ( $member_type === 'internal' ) {
-        $user = $member_infos['project_meta_team_member_user'];
-        $member_name = $user['user_firstname'] . ' ' . $user['user_lastname'];
-      } else if ( $member_type === 'external' ) {
-        $member_name = $member_infos['project_meta_team_member_name'];
-        $member_url = $member_infos['project_meta_team_member_url'];
-      }
-
-      if ( strlen( $member_url ) > 0 ) {
-        echo '<dd><a href="' . $member_url . '">' . $member_name . '</a></dd>';
+      if ( $member_role == "manager" ) {
+        array_push($managers, $member);
       } else {
-        echo '<dd>' . $member_name . '</dd>';
+        array_push($participants, $member);
+      }
+    }
+
+    if ( sizeof($managers) > 0 ) { 
+      echo '<dt>Projektleitung</dt>';
+      foreach ($managers as $member) {
+        $member_infos = $member['project_meta_team_member'];
+        $member_type = $member_infos['project_meta_team_member_type'];
+        $member_role = $member_infos['project_meta_team_member_role'];
+        $member_name = $member_infos['project_meta_team_member_name'];
+        $member_url = '';
+
+        if ( $member_type === 'internal' ) {
+          $user = $member_infos['project_meta_team_member_user'];
+          $member_name = $user['user_firstname'] . ' ' . $user['user_lastname'];
+        } else if ( $member_type === 'external' ) {
+          $member_name = $member_infos['project_meta_team_member_name'];
+          $member_url = $member_infos['project_meta_team_member_url'];
+        }
+
+        if ( strlen( $member_url ) > 0 ) {
+          echo '<dd><a href="' . $member_url . '">' . $member_name . '</a></dd>';
+        } else {
+          echo '<dd>' . $member_name . '</dd>';
+        }
+      }
+    }
+
+    if ( sizeof($participants) > 0 ) { 
+      echo '<dt>Team</dt>';
+      foreach ($participants as $member) {
+        $member_infos = $member['project_meta_team_member'];
+        $member_type = $member_infos['project_meta_team_member_type'];
+        $member_role = $member_infos['project_meta_team_member_role'];
+        $member_name = $member_infos['project_meta_team_member_name'];
+        $member_url = '';
+
+        if ( $member_type === 'internal' ) {
+          $user = $member_infos['project_meta_team_member_user'];
+          $member_name = $user['user_firstname'] . ' ' . $user['user_lastname'];
+        } else if ( $member_type === 'external' ) {
+          $member_name = $member_infos['project_meta_team_member_name'];
+          $member_url = $member_infos['project_meta_team_member_url'];
+        }
+
+        if ( strlen( $member_url ) > 0 ) {
+          echo '<dd><a href="' . $member_url . '">' . $member_name . '</a></dd>';
+        } else {
+          echo '<dd>' . $member_name . '</dd>';
+        }
       }
     }
   }

@@ -25,6 +25,17 @@ body.admin-bar {
   margin-top: -32px;
 }
 
+@media screen and (max-width: 667px) {
+  body.admin-bar {
+    margin-top: -46px;
+  }
+
+  #wpadminbar {
+    display: none;
+    margin-top: 0;
+  }
+}
+
 @import './scss/variables.scss';
 @import './scss/layout.scss';
 @import './scss/typo.scss';

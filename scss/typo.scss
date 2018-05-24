@@ -2,10 +2,7 @@ body,
 html {
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
-}
-
-* {
-  transition: color .3s, font-size .3s;
+  line-height: 1.68;
 }
 
 a {
@@ -70,7 +67,7 @@ dfn, cite, em, i {
 
 pre {
   background: #eee;
-  font-family: "Courier 10 Pitch", Courier, monospace;
+  font-family: monospace;
   font-size: 15px;
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -81,7 +78,7 @@ pre {
 }
 
 code, kbd, tt, var {
-  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+  font-family: monospace;
   font-size: 15px;
   font-size: 0.9375rem;
 }
@@ -172,4 +169,12 @@ sup {
 pre {
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
+}
+
+@media screen and (max-width: 667px) {
+
+  body,
+  html {
+    font-size: 15px;
+  }  
 }

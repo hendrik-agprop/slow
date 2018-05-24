@@ -21,6 +21,13 @@ Text Domain: slow
 body.admin-bar {
   margin-top: -32px; }
 
+@media screen and (max-width: 667px) {
+  body.admin-bar {
+    margin-top: -46px; }
+
+  #wpadminbar {
+    display: none;
+    margin-top: 0; } }
 img {
   width: 100%;
   max-width: 100%;
@@ -35,7 +42,7 @@ img {
     max-width: 50%;
     margin: 0 auto; }
   .container--medium {
-    max-width: 70%;
+    max-width: 75%;
     margin: 0 auto; }
   .container--full {
     position: relative;
@@ -122,6 +129,8 @@ img {
     background: #FFF;
     transition: transform .5s;
     min-height: 24em; }
+    .page-content p:nth-last-child(n+2) {
+      padding: 0 0 1.5em; }
   .page-footer {
     padding: 4em 0 0;
     transition: transform .5s; }
@@ -160,10 +169,7 @@ dl.list--inline dt, dl.list--inline dd {
   display: inline-block;
   margin-right: 1em; }
 
-@media screen and (max-width: 667px) {
-  body {
-    font-size: 16px; }
-
+@media screen and (max-width: 991px) {
   .container {
     position: relative;
     max-width: 100%;
@@ -180,10 +186,8 @@ dl.list--inline dt, dl.list--inline dd {
 body,
 html {
   font-family: 'Montserrat', sans-serif;
-  font-size: 20px; }
-
-* {
-  transition: color .3s, font-size .3s; }
+  font-size: 20px;
+  line-height: 1.68; }
 
 a {
   color: #222; }
@@ -226,7 +230,7 @@ dfn, cite, em, i {
 
 pre {
   background: #eee;
-  font-family: "Courier 10 Pitch", Courier, monospace;
+  font-family: monospace;
   font-size: 15px;
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -236,7 +240,7 @@ pre {
   padding: 1.6em; }
 
 code, kbd, tt, var {
-  font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+  font-family: monospace;
   font-size: 15px;
   font-size: 0.9375rem; }
 
@@ -321,6 +325,10 @@ pre {
   font-size: 1em;
   /* 2 */ }
 
+@media screen and (max-width: 667px) {
+  body,
+  html {
+    font-size: 15px; } }
 button,
 input,
 optgroup,
@@ -557,6 +565,9 @@ textarea {
   margin: 0 -30px 5em;
   overflow: hidden;
   margin-top: 5em; }
+  @media screen and (max-width: 991px) {
+    .article-header {
+      margin-bottom: 2em; } }
 .article-featured-image {
   margin-bottom: 5em; }
 .article-header--fullscreen {
@@ -568,12 +579,11 @@ textarea {
 .article-headline {
   margin: 0;
   padding: 0 0 15px 30px;
-  z-index: 2;
-  max-width: 37em; }
+  z-index: 2; }
   .article-headline h1 {
     margin-bottom: 0; }
   .article-headline h2 {
-    margin-top: 0.75em; }
+    margin: 0.25em 0 0.5em; }
 .article-aside--left {
   margin-bottom: -100%; }
 .article-aside--right {
@@ -645,6 +655,8 @@ textarea {
   .article-share .navigation-items .navigation-item a.icon {
     position: relative;
     bottom: -0.1em; }
+.article--page .article-content {
+  padding: 0 3em; }
 .article--preview .article-headline {
   padding: 0; }
   .article--preview .article-headline h3 {
@@ -687,8 +699,7 @@ textarea {
             padding: 0;
             margin: 0; }
           .article-list--post .article-list-item-content p {
-            padding-top: 2em;
-            max-width: 22em; }
+            padding-top: 2em; }
           .article-list--post .article-list-item-content ul {
             padding-top: 2em;
             font-size: 0.8em; }
@@ -696,6 +707,12 @@ textarea {
           position: relative;
           width: 100%;
           padding-bottom: 50%; }
+          .article-list--post .article-list-item-background a {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0; }
   .article-list-item-wrapper--wide .article-list-item {
     padding-bottom: 50%; }
   .article-list-item {
@@ -729,6 +746,10 @@ textarea {
         transform: scale3d(1, 1, 1);
         opacity: 0;
         transition: all .3s; }
+    .article-list-item-wrapper--wide .article-list-item-content {
+      bottom: 0;
+      padding-bottom: 0;
+      font-size: 1.25em; }
     .article-list-item-content {
       position: absolute;
       padding: 1em 1.5em;
@@ -743,9 +764,11 @@ textarea {
 .page.bright .article-headline {
   color: #FFF; }
 
-@media screen and (max-width: 667px) {
-  .article-header {
-    margin-bottom: 2em; }
+@media screen and (max-width: 991px) {
+  .article--post .article-header {
+    margin: 5em -1em 2em !important; }
+  .article--page .article-content {
+    padding: 0 1em; }
   .article-headline h1 {
     margin-bottom: 0.5em; }
   .article-aside {
@@ -774,8 +797,20 @@ textarea {
     .article .article-content-paragraph--video-copyright {
       padding: 0 2.2em; }
 
+  body:not(.page-template-projects) .article-list {
+    padding: 5em 0 0; }
+
   .article-list {
-    padding: 5em 1em 0; }
+    margin: 0; }
+    .article-list article.row {
+      margin: 0; }
+      .article-list article.row .article-list-item-content {
+        padding-top: 1.5em;
+        padding-left: 0;
+        padding-right: 0; }
+    .article-list .article-list-item-content {
+      padding-left: 1em;
+      padding-right: 1em; }
     .article-list-item-wrapper--wide .article-list-item {
       padding-bottom: 175%; } }
 .gallery .gallery-image-item-meta {
@@ -808,24 +843,37 @@ textarea {
         text-align: left; }
 .gallery--grid {
   margin-top: 2em;
-  padding: 1em 5em 0; }
+  padding: 3em 2.5em; }
   .gallery--grid .gallery-images {
     display: flex;
     flex-direction: column; }
     .gallery--grid .gallery-images-row {
       display: flex;
-      align-items: flex-end; }
+      align-items: center; }
+      @media screen and (max-width: 667px) {
+        .gallery--grid .gallery-images-row {
+          display: block; } }
     .gallery--grid .gallery-images .gallery-image-item {
       width: 50%;
       margin-bottom: 5em;
-      border: 8em solid transparent;
       border-top: 0; }
+      @media screen and (max-width: 667px) {
+        .gallery--grid .gallery-images .gallery-image-item {
+          width: 100%; } }
       .gallery--grid .gallery-images .gallery-image-item:nth-child(2n+1) {
         border-right: 5em solid transparent; }
       .gallery--grid .gallery-images .gallery-image-item:nth-child(2n) {
         border-left: 5em solid transparent; }
       .gallery--grid .gallery-images .gallery-image-item:nth-last-child(n+1) {
         border-bottom: 0; }
+      @media screen and (max-width: 1024px) {
+        .gallery--grid .gallery-images .gallery-image-item {
+          border-right-width: 2em !important;
+          border-left-width: 2em !important; } }
+      @media screen and (max-width: 667px) {
+        .gallery--grid .gallery-images .gallery-image-item {
+          border-right: 0 !important;
+          border-left: 0 !important; } }
       .gallery--grid .gallery-images .gallery-image-item .gallery-image {
         position: relative;
         padding-bottom: 166%; }
@@ -853,6 +901,12 @@ textarea {
 
   .gallery--inline .gallery-image-item-copyright {
     transform: scale(1.2); } }
+@media screen and (max-width: 1280px) {
+  .gallery-image-item-meta {
+    padding-left: 20% !important; }
+
+  .gallery--grid .gallery-image-item-meta {
+    padding-left: 0 !important; } }
 .video {
   width: 100%;
   height: 100%;
@@ -901,7 +955,7 @@ textarea {
     opacity: 1;
     left: 0; }
 
-.article-list .newsletter-box {
+.article-list--post .newsletter-box {
   padding-top: 3em;
   padding-bottom: 6em; }
 
@@ -909,6 +963,12 @@ textarea {
   padding: 1em 1.5em 2em;
   display: flex;
   flex-direction: column; }
+  .newsletter-box small {
+    font-size: 0.7em;
+    line-height: 1.4em;
+    display: inline-block;
+    padding: 1.5em 25% 0 0;
+    color: #888; }
   .newsletter-box--small {
     align-self: flex-end;
     background: none;
@@ -916,16 +976,17 @@ textarea {
     .newsletter-box--small h2,
     .newsletter-box--small p,
     .newsletter-box--small form {
-      max-width: 22em;
       text-align: left; }
     .newsletter-box--small p {
-      padding: 1em 0 .25em !important; }
+      padding: 1em 0 2em !important; }
+      .newsletter-box--small p small {
+        padding-top: 0; }
   .newsletter-box h2 {
     margin: 0;
     padding: 0 0 0.25em; }
   .newsletter-box p {
-    padding: 0;
-    margin: 0 0 1em; }
+    padding: 0 20% 0;
+    margin: 1em 0 0; }
   .newsletter-box form {
     display: flex; }
     .newsletter-box form input[type="text"] {

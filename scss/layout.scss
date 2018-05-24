@@ -16,7 +16,7 @@ img {
   }
 
   &--medium {
-    max-width: 70%;
+    max-width: 75%;
     margin: 0 auto;
   }
 
@@ -162,6 +162,10 @@ img {
     background: $white;
     transition: transform .5s;
     min-height: 24em;
+
+    p:nth-last-child(n+2) {
+      padding: 0 0 1.5em;
+    }
   }
 
   &-footer {
@@ -235,11 +239,7 @@ dl {
   }
 }
 
-@media screen and (max-width: 667px) {
-
-  body {
-    font-size: 16px;
-  }  
+@media screen and (max-width: 991px) {
 
   .container {
     position: relative;

@@ -102,6 +102,7 @@ function slow_scripts() {
 	wp_enqueue_style( 'boostrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' );
 	// Montserrat Font
 	wp_enqueue_style( 'montserrat', 'https://fonts.googleapis.com/css?family=Montserrat:400,700' );
+	wp_enqueue_style( 'crimson-text', 'https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,700');
 
 	// Main css style
 	wp_enqueue_style( 'slow-style', get_stylesheet_uri() );
@@ -160,4 +161,132 @@ function slow_generate_random_string( $length = 10 ) {
         $randomString .= $characters[ rand( 0, $charactersLength - 1 ) ];
     }
     return $randomString;
+}
+
+if ( ! function_exists( 'slow_share_links' ) ) {
+  /**
+   * Site header navigation wrapper
+   */
+  function slow_share_links( $post_type = 'post' ) {
+
+    global $wp;
+    global $post;
+
+    $current_url = home_url( add_query_arg( array(), $wp->request ) );
+    $fb_url      = 'https://www.facebook.com/sharer/sharer.php?u=' . $current_url; 
+    $tw_url      = 'http://twitter.com/share?url=' . $current_url . '&text=';
+    $mail_subj   = '';
+    $mail_txt    = '';
+
+    if ( $post_type == 'post' ) {
+      
+      $tw_url .= get_bloginfo( 'name' ) . ' - ' . get_the_title();
+      $tw_url .= '&hashtags=slow,cologne,architecture';
+      $mail_subj = get_bloginfo('name') . ' - ' . get_the_title();
+      $mail_txt  = get_bloginfo('name') . ' - ' . get_the_title() . '%0A%0A';
+      $mail_txt .= get_the_excerpt() . '%0A%0A';
+      $mail_txt .= ' ' . __( 'More on' , 'mkt-theme' ) . ': ' . $current_url;
+
+    } else if ( $post_type == 'date' ) {
+
+      $date_title = get_the_title();
+      $location   = label_addons_get_the_date_location();
+      $venue      = $location['venue'];
+      $city       = $location['city'];
+      $country    = $location['country'];
+      $location_text = '';
+      $date          = '';
+
+      if ( $venue ) {
+        $location_text .= $venue;
+      }
+
+      if ( $venue AND $city ) {
+        $location_text .= ', ';
+      }
+
+      if ( $city ) {
+        $location_text .= $city;
+      }
+
+      if ( $country ) {
+        $location_text .= ', ' . $country;
+      }
+      
+      if ( function_exists( 'label_addons_get_the_date_datetime' ) ) {
+        $datetime = label_addons_get_the_date_datetime();
+        $date = new DateTime( $datetime );
+        $date = $date->format( "l – d. M Y" );
+      }
+
+      $title  = $date_title . ' @ ' . $location_text . ' - ' . $date;
+      $title .= ' ' . $sep . ' ' . $site_title;
+
+      $tw_url .= $title;
+      $tw_url .= '&hashtags=monkeytown';
+
+      $mail_subj = get_bloginfo('name') . ' - ' . $title;
+      $mail_txt  = get_bloginfo('name') . ' - ' . $title . '%0A%0A';
+      $mail_txt .= get_the_excerpt() . '%0A%0A';
+      $mail_txt .= ' ' . __( 'More on' , 'mkt-theme' ) . ': ' . $current_url;
+
+    } else if ( $post_type == 'release' ) {
+
+      $release_title  = get_the_title();
+      $release_artist = '';
+
+      if ( function_exists( 'label_addons_get_the_release_artist_title' ) ) {
+        $release_artist = label_addons_get_the_release_artist_title();
+      }
+
+      if ( strlen( $release_artist ) > 0 ) {
+        $release_title = $release_artist . ' - ' . $release_title;
+      }
+
+      $title  = $release_title;
+      $title .= ' ' . $sep . ' ' . $site_title;
+
+      $tw_url .= get_bloginfo( 'name' ) . ' - ' . get_the_title();
+      $tw_url .= '&hashtags=monkeytown';
+      
+      if ( strlen( $release_artist ) > 0 ) {
+        $tw_url .= ',' . strtolower( $release_artist );
+      }
+
+      $mail_subj = get_bloginfo('name') . ' - ' . $title;
+      $mail_txt  = get_bloginfo('name') . ' - ' . $title . '%0A%0A';
+      $mail_txt .= get_the_excerpt() . '%0A%0A';
+      $mail_txt .= ' ' . __( 'More on' , 'mkt-theme' ) . ': ' . $current_url;
+
+    } else if ( $post_type == 'product' ) {
+
+      $tw_url .= get_bloginfo( 'name' ) . ' - ' . get_the_title();
+      $tw_url .= '&hashtags=monkeytown';
+      $mail_subj = get_bloginfo('name') . ' - ' . get_the_title();
+      $mail_txt  = get_bloginfo('name') . ' - ' . get_the_title() . '%0A%0A'; 
+      $mail_txt .= get_the_excerpt() . '%0A%0A';
+      $mail_txt .= ' ' . __( 'More on' , 'mkt-theme' ) . ': ' . $current_url;
+    }
+    
+    ?>
+    <div class="article-share">
+      <nav id="social-share-navigation" class="navigation">
+        <ul class="navigation-items list list--inline list--inline--right">
+          <li class="navigation-item navigation-item--icon">
+            <span>Teilen via</span>
+          </li>
+          <li class="navigation-item navigation-item--icon">
+            <a href="<?php echo $fb_url; ?>" target="_blank" class="icon icon--facebook" title="Share via Facebook"></a>
+          </li>
+          <li class="navigation-item navigation-item--icon">
+            <a href="<?php echo $tw_url; ?>" target="_blank" class="icon icon--twitter" title="Share via Twitter"></a>
+          </li>
+          <li class="navigation-item navigation-item--icon">
+            <a href="mailto:?&subject=<?php echo $mail_subj; ?>&body=<?php echo $mail_txt; ?>" target="_blank" class="icon icon--mail" title="Share via Mail"></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <?php
+  }
 }

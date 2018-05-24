@@ -1,4 +1,19 @@
 <article id="post-<?php the_ID(); ?>" class="article article--page container">
-	<h1 style="margin-top: 10em;"><?php the_title(); ?></h1>
-  <?php the_content(); ?>
+  <div class="article-content-wrapper">
+    <div class="row" style="margin-top: 10em;">
+      <div class="col-md-5" style="margin-bottom: 2em;">
+        <?php the_post_thumbnail( 'slow-large' ); ?>
+      </div>
+      <div class="col-md-7 article-content">
+        <h1><?php the_title(); ?></h1>
+        <?php
+        $subtitle = get_field( 'subtitle' );
+        if ( strlen( $subtitle ) > 0 ) {
+          echo '<h2 class="article-headline-second">' . $subtitle . '</h2>';
+        }
+        ?>
+        <?php slow_custom_content( $post, $head = true, $tail = true ); ?>
+      </div>
+    </div>
+  </div>
 </article>

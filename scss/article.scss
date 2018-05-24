@@ -33,6 +33,10 @@
     margin: 0 -30px 5em;
     overflow: hidden;
     margin-top: 5em;
+
+    @media screen and (max-width: 991px) {
+      margin-bottom: 2em;
+    }
   }
 
   &-featured-image {
@@ -53,14 +57,13 @@
     margin: 0;
     padding: 0 0 15px 30px;
     z-index: 2;
-    max-width: 37em;
 
     h1 {
       margin-bottom: 0;
     }
 
     h2 {
-      margin-top: 0.75em
+      margin: 0.25em 0 0.5em;
     }
   }
 
@@ -198,6 +201,12 @@
     }
   }
 
+  &--page {
+    .article-content {
+      padding: 0 3em;
+    }
+  }
+
   &--project {
   }
 
@@ -275,7 +284,6 @@
 
           p {
             padding-top: 2em;
-            max-width: 22em;
           }
 
           ul {
@@ -288,6 +296,14 @@
           position: relative;
           width: 100%;
           padding-bottom: 50%;
+
+          a {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+          }
         }
       }
     }
@@ -344,11 +360,13 @@
       }
     }
 
-    &:hover {
-      .article-list-item-background--hover {
-        // filter: blur(17px) brightness(1.05) saturate(0.8);
-        // transform: scale3d(1, 1, 1);
-        // opacity: 1;
+    &-wrapper {
+      &--wide {
+        .article-list-item-content {
+          bottom: 0;
+          padding-bottom: 0;
+          font-size: 1.25em;
+        }
       }
     }
 
@@ -378,10 +396,16 @@
   }
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 991px) {
   .article {
-    &-header {
-      margin-bottom: 2em;
+    &--post .article-header {
+      margin: 5em -1em 2em !important;
+    }
+
+    &--page {
+      .article-content {
+        padding: 0 1em;
+      }
     }
 
     &-headline {
@@ -430,8 +454,27 @@
     }
   }
 
+  body:not(.page-template-projects) .article-list {
+    padding: 5em 0 0;
+  }
+  
   .article-list {
-    padding: 5em 1em 0;
+    margin: 0;
+
+    article.row {
+      margin: 0;
+
+      .article-list-item-content {
+        padding-top: 1.5em;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .article-list-item-content {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
 
     &-item-wrapper {
       
