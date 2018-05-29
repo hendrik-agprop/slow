@@ -1,0 +1,88 @@
+.vita-list {
+  padding: 4em 0 0;
+
+  &-item {
+    display: flex;
+    padding-bottom: 4em;
+
+    position: relative;
+    left: -13.7em;
+    width: 150%;
+
+    @media screen and (max-width: 991px) {
+      width: 100%;
+      left: 0;
+    }
+
+    &-portrait {
+      width: 10em;
+
+      @media screen and (max-width: 520px) {
+        width: 5.7em;
+      }
+    } 
+
+    &-text {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      padding-left: 3.7em;
+
+      @media screen and (max-width: 991px) {
+        padding-left: 1em;
+      }
+
+      &-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+      }
+
+      &-top {
+        padding-bottom: 1.5em;
+      }
+
+      &-bottom {
+        
+      }
+
+      h3 {
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+      }
+    }  
+
+    &-name {
+      margin: 0;
+      padding: 0;
+    }
+
+    &-email {
+
+    }
+
+    &-position {
+
+    }
+
+    &-links {
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .vita-list-item-link {
+        display: inline-block;
+        padding: 0.5em 0 0;
+        margin-right: 1em;
+
+        a {
+          border-bottom: 1px solid $text-color;
+        }
+      }
+    }
+  } 
+}

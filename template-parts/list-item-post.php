@@ -5,7 +5,7 @@
 		     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"></a>
 		</div>
 	</div>
-	<div class="col-lg-5">
+	<div class="col-lg-6">
 		<div class="article-list-item-content">
 			<h2>
 				<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">

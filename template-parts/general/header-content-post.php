@@ -10,7 +10,7 @@
       <img src="<?php echo get_the_post_thumbnail_url( $post, 'slow-small' ); ?>">
     </div>
   </div>
-  <div class="container container--medium">
+  <div class="container container--small">
     <div class="article-headline article-headline--large">
       <h1 class="article-headline-first">
         <?php the_title(); ?>
@@ -22,6 +22,11 @@
       }
       ?>
     </div>
-    <?php //get_template_part( 'template-parts/share/share' ); ?>
+    <div class="row">
+      <div class="col-md-12">
+        <a href="http://www.slow.cc/aktuelles" class="back"> zu allen News</a>
+        <?php get_template_part( 'template-parts/share/share' ); ?>
+      </div>
+    </div>
   </div>
 </div>

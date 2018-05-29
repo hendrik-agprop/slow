@@ -30,9 +30,7 @@ jQuery(document).ready(function($){
     }
   });
 
-  $('.swiper-container--inline').each(function(){
-
-    console.log('oo');
+  $('.swiper-container--inline').each(function() {
 
     var images = $(this).find('.swiper-slide');
 
@@ -40,10 +38,6 @@ jQuery(document).ready(function($){
       new Swiper(this, {
         slidesPerView: 3,
         loop: true,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: true,
-        },
         centeredSlides: true,
         navigation: {
           nextEl: '.swiper-button-next',

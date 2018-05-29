@@ -128,6 +128,9 @@ function slow_custom_content( $post = null, $head = true, $tail = true, $length 
         $classes = ($head == false AND $tail == true AND $i > 1) ? 'container--medium' : $classes;
         slow_custom_content_video( $paragraph, $classes );
         break;
+      case 'custom_content_vita_list':
+        custom_content_vita_list( $paragraph );
+        break;
       default:
         return false;
     } 
@@ -177,7 +180,7 @@ function slow_custom_content_image( $paragraph, $classes = '' ) {
   $image_data        = $paragraph['custom_content_image_image'];
   $image_id          = $image_data['ID'];
   $image_size        = strtolower( $size ) == 'small' ? 'slow-small' : (strtolower( $size ) == 'large' ? 'slow-large' : '');
-  $image_url         = wp_get_attachment_image_src( $image_id, $image_size, false )[0];
+  $image_url         = wp_get_attachment_image_src( $image_id, 'slow-small', false )[0];
   $image_zoom_url    = wp_get_attachment_image_src( $image_id, 'slow-large', false )[0];
   $title             = $image_meta['custom_content_image_meta_title'];
   $caption           = $image_meta['custom_content_image_meta_caption'];
@@ -250,7 +253,7 @@ function slow_custom_content_gallery( $paragraph, $classes = '' ) {
       echo '<div class="gallery-images-row">';
     }
 
-    $image_item_classes = $image_width > $image_height ? 'gallery-image-item--landscape' : 'gallery-image-item--protrait';
+    $image_item_classes = $image_width > $image_height ? 'gallery-image-item--landscape' : 'gallery-image-item--portrait';
     echo '<div class="gallery-image-item swiper-slide ' . $image_item_classes . '">';
     echo '<div id="' . $id .'" class="gallery-image zoomable-image" style="background-image: url(' . $image_url . ');"';
     echo ' data-zoomable-image="' . $image_zoom_url .'"></div>';
@@ -302,6 +305,271 @@ function slow_custom_content_video( $paragraph, $classes = 'container--medium' )
   echo '</div>';
   echo '</div>';
   echo '</div>';
+}
+
+/**
+ * Body content vita list
+ */
+function custom_content_vita_list( $paragraph ) {
+  
+  $title = $paragraph['custom_content_vita_list_title'];
+  $subtitle = $paragraph['custom_content_vita_list_subtitle'];
+  $users = $paragraph['custom_content_vita_list_users'];
+
+  if (!$users) {
+    return;
+  }
+
+  echo '<div class="article-content-paragraph article-content-paragraph--vita-list">';
+  echo '<div class="vita-list">';
+  echo '<div class="vita-list-wrapper">';
+
+  if ( $title ) {
+    echo '<h2>' . $title .'</h2>';
+  }
+  if ( $subtitle ) {
+    echo '<h3>' . $subtitle .'</h3>';
+  }
+
+  foreach ( (array)$users as $user ) {
+    $user = $user['custom_content_vita_list_user'];
+    $user_id = $user['ID'];
+    $user_vita = get_field( 'vita_main', 'user_' . $user_id );
+    $user_email = $user['user_email'];
+    $name = $user_vita['vita_main_name'];
+    $portrait = $user_vita['vita_main_portrait']['sizes']['slow-small'];
+    $birthday = $user_vita['vita_main_birthday'];
+    $position = $user_vita['vita_main_position'];
+    $page_url = $user_vita['vita_main_page'];
+    $links = $user_vita['vita_main_links'];
+
+    echo '<div class="vita-list-item">';
+
+    echo '<div class="vita-list-item-portrait">';
+    if ( $page_url ) { echo '<a href="' . $page_url . '">'; }
+    echo '<img src="' . $portrait . '">';
+    if ( $page_url ) { echo '</a>'; }
+    echo '</div>';
+
+    echo '<div class="vita-list-item-text">';
+    echo '<div class="vita-list-item-text-wrapper">';
+
+    echo '<div class="vita-list-item-text-top">';
+    echo '<h3 class="vita-list-item-name">';
+    if ( $page_url ) { echo '<a href="' . $page_url . '">'; }
+    echo $name; 
+    if ( $page_url ) { echo '</a>'; }
+    echo '</h3>';
+
+    echo '<div class="vita-list-item-position">';
+    echo '<span>' . $position . '</span>';
+    echo '</div>';
+    echo '</div>';
+
+    echo '<div class="vita-list-item-text-bottom">';
+    echo '<div class="vita-list-item-links">';
+    echo '<ul>';
+    
+    if ( $page_url ) { 
+      echo '<li class="vita-list-item-link vita-list-item-link--more">';
+      echo '<a href="' . $page_url . '">Vita</a>';
+      echo '</li>';
+    } 
+
+    if ( $user_email ) { 
+      echo '<li class="vita-list-item-link vita-list-item-link--mail">';
+      echo '<a href="mailto:' . $user_email . '">Mail</a>';
+      echo '</li>';
+    }
+
+    if ( $links ) {
+      foreach ($links as $link) {
+        $link = $link['vita_main_link'];
+        $link_title = $link['vita_main_link_title'];
+        $link_url = $link['vita_main_link_url'];
+        echo '<li class="vita-list-item-link">';
+        echo '<a href="' . $link_url . '" target="_blank">' . $link_title . '</a>';
+        echo '</li>';
+      }
+    }
+    echo '</ul>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+  }
+
+  echo '</div>';
+  echo '</div>';
+  echo '</div>';
+}
+
+/**
+ * Vita
+ */
+function vita( $post = null ) {
+  
+  if ( !$post ) return false;
+
+  $user = get_field( 'vita_page_user', $post->ID );
+
+  if (!$user) {
+    return;
+  }
+
+  $user_id = $user['ID'];
+  $user_vita = get_field( 'vita_main', 'user_' . $user_id );
+  $user_email = $user['user_email'];
+  $name = $user_vita['vita_main_name'];
+  $portrait = $user_vita['vita_main_portrait']['sizes']['slow-small'];
+  $birthday = $user_vita['vita_main_birthday'];
+  $position = $user_vita['vita_main_position'];
+  $introduction = $user_vita['vita_main_introduction'];
+  $links = $user_vita['vita_main_links'];
+
+  $careers = get_field( 'vita_careers', 'user_' . $user_id );
+
+  echo '<div class="article-content-paragraph article-content-paragraph--vita">';
+  echo '<div class="vita-wrapper">';
+
+  echo '<div class="vita-position">';
+  echo '<h2>' . $position . '</h2>';
+  echo '</div>';
+
+  echo '<div class="vita-links">';
+  echo '<ul>';
+  echo '<li class="vita-link vita-link--mail">';
+  echo '<a href="mailto:' . $user_email . '">Mail</a>';
+  echo '</li>';
+
+  if ( $links ) {
+    foreach ($links as $link) {
+      $link = $link['vita_main_link'];
+      $link_title = $link['vita_main_link_title'];
+      $link_url = $link['vita_main_link_url'];
+      echo '<li class="vita-link">';
+      echo '<a href="' . $link_url . '" target="_blank">' . $link_title . '</a>';
+      echo '</li>';
+    }
+  }
+  echo '</ul>';
+  echo '</div>'; // links
+
+  echo '<div class="vita-introduction">';
+  echo '<p>' . $introduction . '</p>';
+  echo '</div>';
+
+  if ( $careers ) {
+    echo '<div class="vita-careers">';
+    
+    foreach ( $careers as $career ) {
+      $career = $career['vita_career'];
+      $title = $career['vita_career_title'];
+      $steps = $career['vita_career_steps'];
+
+      echo '<div class="vita-career">';
+      echo '<strong class="vita-career-title">' .$title . '</strong>';
+
+      foreach ($steps as $step ) {
+        $step = $step['vita_career_step'];
+        $step_title = $step['vita_career_step_title'];
+        $step_url = $step['vita_career_step_url'];
+        $step_period = $step['vita_career_step_period'];
+        $step_period_from = $step_period['vita_career_step_period_from'];
+        $step_period_to = $step_period['vita_career_step_period_to'];
+        $step_description = $step['vita_career_step_description'];
+
+        echo '<div class="vita-career-step">';
+
+        echo '<div class="vita-career-step-period">';
+        if ( !$step_period_to ) { echo '<span>seit</span> '; }
+        echo '<span>' . $step_period_from . '</span>';
+        if ( $step_period_to ) { 
+          echo '<span> - </span>'; 
+          echo '<span>' . $step_period_to . '</span>';
+        }
+        echo '</div>';
+
+        echo '<div class="vita-career-step-title">'; 
+        if ( $step_url ) { echo '<a href="'. $step_url . '">'; }
+        echo $step_title;
+        if ( $step_url ) { echo '</a>'; }
+        echo '</div>';
+
+        echo '<div class="vita-career-step-description">';
+        echo '<p>' . $step_description . '</p>';
+        echo '</div>';
+
+        echo '</div>';
+      }
+
+      echo '</div>'; // vita-career
+    }
+    
+    echo '</div>'; // careers
+  }
+  
+  echo '</div>'; // vita-wrapper
+  echo '</div>'; // article-content-paragraph
+}
+
+/**
+ * Vita
+ */
+function vita_projects( $post = null ) {
+  
+  if ( !$post ) return false;
+
+  $user = get_field( 'vita_page_user', $post->ID );
+
+  if (!$user) {
+    return;
+  }
+
+  $user_id = $user['ID'];
+  $user_vita = get_field( 'vita_main', 'user_' . $user_id );
+  $projects = $user_vita['vita_main_projects'];
+  $name = $user_vita['vita_main_name'];
+
+  $project_ids = array();
+  foreach ( (array)$projects as $project) {
+    $project = $project['vita_main_project'];
+    array_push( $project_ids, $project->ID );
+  }
+
+  $projects = new WP_Query( array(
+    "post_type" => "project",
+    'post__in'  => $project_ids
+  ) );
+
+  if ( $projects->have_posts() ) : 
+    echo '<div class="vita-projects container">';
+    echo '<div class="row">';
+    echo '<div class="col-md-12">';
+    echo '<strong class="vita-projects-title">Projekte von ' . $name . '</strong>';
+    echo '<a href="http://www.slow.cc" class="back">alle Projekte</a>';
+    echo '</div>';
+    echo '</div>';
+
+    echo '<div class="row">';
+    echo '<div class="col-md-12">';
+    echo '<div class="article-list swiper-container--inline swiper-container--stream">';
+    echo '<div class="swiper-wrapper">';
+    /* Start the Loop */
+    while ( $projects->have_posts() ) :
+      $projects->the_post();
+      echo '<div class="article-list-item-wrapper swiper-slide">';
+      get_template_part( 'template-parts/list-item', 'projects' );
+      echo '</div>';
+    endwhile;
+
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+  endif;
 }
 
 function slow_project_period( $post ) {

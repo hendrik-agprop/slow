@@ -8,6 +8,28 @@ html {
 a {
   color: $text-color;
 
+  &.back {
+    display: inline-block;
+
+    &:after {
+      display: none !important;
+    }
+
+    &:before {
+      content: "";
+      position: relative;
+      display: inline-block;
+      top: 0.175em;
+      width: 1.1em;
+      height: 1em;
+      margin-right: .2em;
+      background-image: url(./img/icn_arrow_left.svg);
+      background-size: 1em;
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+  }
+
   &:hover {
     color: $hover-text-color;
     text-decoration: none;
@@ -113,6 +135,10 @@ h1 {
   line-height: 1.1;
   margin: 0 0 0.5em;
 
+  @media screen and (max-width: 375px) {
+    font-size: 2.2em;
+  }
+
   & + h2 {
     position: relative;
     margin-top: -0.5em;
@@ -124,6 +150,14 @@ h2 {
   font-weight: bold;
   line-height: 1.25em;
   padding-bottom: 1em;
+
+  @media screen and (max-width: 375px) {
+    font-size: 1.9em;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 1.8em;
+  }
 }
 
 h3 {
@@ -176,5 +210,13 @@ pre {
   body,
   html {
     font-size: 15px;
+  }  
+}
+
+@media screen and (max-width: 320px) {
+
+  body,
+  html {
+    font-size: 14px;
   }  
 }

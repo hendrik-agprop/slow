@@ -1,0 +1,8 @@
+#your-profile .form-table:nth-last-child(n+5) {
+  display: none;
+}
+
+#your-profile #acf-form-data+h2,
+#your-profile #acf-form-data+h2+.form-table {
+  display: block;
+}
